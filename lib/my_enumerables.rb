@@ -40,6 +40,35 @@ module Enumerable
     end
     arr.empty? == true
   end
+
+  def my_count
+    arr = []
+    self.my_each do |element|
+      if block_given?
+        arr << element if yield(element) == true
+      else
+        arr << element
+      end
+    end
+    arr.length
+  end
+
+  def my_map
+    arr = []
+    self.my_each do |element|
+      arr << yield(element)
+    end
+    arr
+  end
+
+  def my_inject(int_value)
+    total = int_value
+    self.my_each do |element|
+      total = yield(total,element)
+    end
+    total
+  end
+
 end
 
 # You will first have to define my_each
