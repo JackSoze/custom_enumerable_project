@@ -9,7 +9,7 @@ end
 class Array
 
   def my_each
-    self.each{|element|element}
+    self.each{|element|yield element}
   end
 
 end
