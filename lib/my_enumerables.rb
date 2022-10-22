@@ -1,9 +1,8 @@
 module Enumerable
-
   def my_each_with_index
     index = 0
     self.my_each do |element|
-      yield(element,index)
+      yield(element, index)
       index += 1
     end
   end
@@ -11,11 +10,36 @@ module Enumerable
   def my_select
     arr = []
     self.my_each do |element|
-      if yield(element) == true then arr << element end
+      arr << element if yield(element) == true
     end
     arr
   end
 
+  def my_all?
+    arr = []
+    original_arr = []
+    self.my_each do |element|
+      original_arr << element
+      arr << element if yield(element) == true
+    end
+    arr == original_arr
+  end
+
+  def my_any?
+    arr = []
+    self.my_each do |element|
+      arr << element if yield(element) == true
+    end
+    arr.empty? != true
+  end
+
+  def my_none?
+    arr = []
+    self.my_each do |element|
+      arr << element if yield(element) == true
+    end
+    arr.empty? == true
+  end
 end
 
 # You will first have to define my_each
@@ -23,18 +47,11 @@ end
 # your enumerable module will have access
 # to this method
 class Array
-
   include Enumerable
 
-  def my_each
-    self.each{|element|yield element}
+  def my_each(&)
+    self.each(&)
   end
-
 end
 
 # array.my_each_with_index
-
-
-
-
-
