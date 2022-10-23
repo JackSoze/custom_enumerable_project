@@ -64,11 +64,10 @@ module Enumerable
   def my_inject(int_value)
     total = int_value
     self.my_each do |element|
-      total = yield(total,element)
+      total = yield(total, element)
     end
     total
   end
-
 end
 
 # You will first have to define my_each
